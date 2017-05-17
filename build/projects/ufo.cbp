@@ -313,6 +313,8 @@
 		<Unit filename="../../src/client/battlescape/events/event/player/e_event_doendround.h" />
 		<Unit filename="../../src/client/battlescape/events/event/player/e_event_endroundannounce.cpp" />
 		<Unit filename="../../src/client/battlescape/events/event/player/e_event_endroundannounce.h" />
+		<Unit filename="../../src/client/battlescape/events/event/player/e_event_message.cpp" />
+		<Unit filename="../../src/client/battlescape/events/event/player/e_event_message.h" />
 		<Unit filename="../../src/client/battlescape/events/event/player/e_event_reset.cpp" />
 		<Unit filename="../../src/client/battlescape/events/event/player/e_event_reset.h" />
 		<Unit filename="../../src/client/battlescape/events/event/player/e_event_results.cpp" />

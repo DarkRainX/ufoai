@@ -41,7 +41,16 @@ void G_MissionAddVictoryMessage (const char* message)
 }
 
 static inline const char* G_MissionGetTeamString (const int team) {
-	return (team == TEAM_PHALANX ? "PHALANX" : (team == TEAM_ALIEN ? "The alien" : va("Team %i's", team)));
+	switch (team) {
+		case TEAM_PHALANX:
+			return _("PHALANX");
+		case TEAM_ALIEN:
+			return _("The alien");
+		case TEAM_CIVILIAN:
+			return _("Civilian");
+		default:
+			return va("Team %i's", team);
+	}
 }
 
 /**
@@ -60,10 +69,10 @@ bool G_MissionTouch (Edict* self, Edict* activator)
 	if (!G_IsCivilian(actor) && self->isOpponent(actor)) {
 		if (!self->item && self->count) {
 			if (self->targetname) {
-				gi.BroadcastPrintf(PRINT_HUD, _("%s forces are attacking the %s!"), actorTeam, self->targetname);
+				G_EventClientMessage(PM_ALL, _("%s forces are attacking the %s!"), actorTeam, self->targetname);
 			} else {
 				const char* const teamName = G_MissionGetTeamString(self->getTeam());
-				gi.BroadcastPrintf(PRINT_HUD, _("%s forces are attacking %s target zone!"),
+				G_EventClientMessage(PM_ALL, _("%s forces are attacking %s target zone!"),
 						actorTeam, teamName);
 			}
 
@@ -87,9 +96,9 @@ bool G_MissionTouch (Edict* self, Edict* activator)
 			}
 			self->count = level.actualRound;
 			if (self->targetname) {
-				gi.BroadcastPrintf(PRINT_HUD, _("%s forces have occupied the %s!"), actorTeam, self->targetname);
+				G_EventClientMessage(PM_ALL, _("%s forces have occupied the %s!"), actorTeam, self->targetname);
 			} else {
-				gi.BroadcastPrintf(PRINT_HUD, _("%s forces have occupied their target zone!"), actorTeam);
+				G_EventClientMessage(PM_ALL, _("%s forces have occupied their target zone!"), actorTeam);
 			}
 			return true;
 		}
@@ -109,9 +118,9 @@ bool G_MissionTouch (Edict* self, Edict* activator)
 			/* drop the weapon - even if out of TUs */
 			G_ActorInvMove(actor, cont->def(), item, INVDEF(CID_FLOOR), NONE, NONE, false);
 			if (self->targetname) {
-				gi.BroadcastPrintf(PRINT_HUD, _("The %s was placed at the %s."), item->def()->name, self->targetname);
+				G_EventClientMessage(PM_ALL, _("The %s was placed at the %s."), item->def()->name, self->targetname);
 			} else {
-				gi.BroadcastPrintf(PRINT_HUD, _("The %s was placed."), item->def()->name);
+				G_EventClientMessage(PM_ALL, _("The %s was placed."), item->def()->name);
 			}
 			self->count = level.actualRound;
 			return true;
@@ -137,9 +146,9 @@ void G_MissionReset (Edict* self, Edict* activator)
 	if (activator->getTeam() == self->getTeam()) {
 		const char* const actTeam = G_MissionGetTeamString(activator->getTeam());
 		if (self->targetname)
-			gi.BroadcastPrintf(PRINT_HUD, _("%s forces have left the %s!"), actTeam, self->targetname);
+			G_EventClientMessage(PM_ALL, _("%s forces have left the %s!"), actTeam, self->targetname);
 		else
-			gi.BroadcastPrintf(PRINT_HUD, _("%s forces have left their target zone!"), actTeam);
+			G_EventClientMessage(PM_ALL, _("%s forces have left their target zone!"), actTeam);
 	}
 	/* All team actors are gone, reset counter */
 	self->count = 0;
@@ -282,7 +291,7 @@ void G_MissionThink (Edict* self)
 				const char* msg = chain->message;
 				if (msg[0] == '_')
 					++msg;
-				gi.BroadcastPrintf(PRINT_HUD, "%s", msg);
+				G_EventClientMessage(PM_ALL, "%s", msg);
 			}
 		}
 

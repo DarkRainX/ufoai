@@ -166,6 +166,7 @@
 		<Unit filename="../../src/client/battlescape/events/event/player/e_event_centerview.cpp" />
 		<Unit filename="../../src/client/battlescape/events/event/player/e_event_doendround.cpp" />
 		<Unit filename="../../src/client/battlescape/events/event/player/e_event_endroundannounce.cpp" />
+		<Unit filename="../../src/client/battlescape/events/event/player/e_event_message.cpp" />
 		<Unit filename="../../src/client/battlescape/events/event/player/e_event_reset.cpp" />
 		<Unit filename="../../src/client/battlescape/events/event/player/e_event_results.cpp" />
 		<Unit filename="../../src/client/battlescape/events/event/player/e_event_startgame.cpp" />

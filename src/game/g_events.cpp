@@ -716,3 +716,48 @@ void G_EventEnd (void)
 	}
 	gi.EndEvents();
 }
+
+void G_EventClientMessage (playermask_t playerMask, const char* const fmt, ...)
+{
+	G_EventAdd(playerMask, EV_CLIENT_MESSAGE, -1);
+	const size_t fmtLen = strlen(fmt);
+	const char* const fmtEnd = fmt + fmtLen;
+	gi.WriteString(fmt);
+	va_list ap;
+	va_start(ap, fmt);
+	for (const char* c = fmt; c < fmtEnd; ++c) {
+		if (*c != '%') {
+			++c;
+		} else if (*++c == '%') {
+			++c;
+		} else {
+			while (strchr("-+ #0", *c)) ++c; /* Skip flags */
+			while (isdigit(*c)) ++c; /* Skip width */
+			if (*c == '.') {
+				++c;
+				while (isdigit(*c)) ++c; /* Skip precision */
+			}
+			switch (*c) {
+				case 'c':
+					gi.WriteChar(va_arg(ap, int));
+					break;
+				case 's':
+					gi.WriteString(va_arg(ap, char*));
+					break;
+				case 'd': case 'i':
+					gi.WriteLong(va_arg(ap, int));
+					break;
+				case 'f': case 'F':
+				case 'e': case 'E':
+				case 'g': case 'G':
+					gi.WriteAngle(va_arg(ap, double));
+					break;
+				default:
+					gi.Error("G_EventClientMessage: invalid format specifier: '%c'", *c);
+					break;
+			}
+		}
+	}
+	va_end(ap);
+	G_EventEnd();
+}

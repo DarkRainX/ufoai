@@ -414,7 +414,9 @@ static const eventNames_t eventNames[] = {
 	M(EV_CLIENT_ACTION),
 	M(EV_RESET_CLIENT_ACTION),
 
-	M(EV_CAMERA_APPEAR)
+	M(EV_CAMERA_APPEAR),
+
+	M(EV_CLIENT_MESSAGE)
 };
 #undef M
 CASSERT(lengthof(eventNames) == EV_NUM_EVENTS);

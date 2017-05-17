@@ -87,3 +87,4 @@ void G_EventReactionFireAddTarget(const Edict& shooter, const Edict& target, int
 void G_EventReactionFireRemoveTarget(const Edict& shooter, const Edict& target, int step);
 void G_EventReactionFireTargetUpdate(const Edict& shooter, const Edict& target, int tus, int step);
 void G_EventReactionFireAbortShot(const Edict& shooter, const Edict& target, int step);
+void G_EventClientMessage(playermask_t playerMask, const char* const fmt, ...);

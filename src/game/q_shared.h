@@ -139,6 +139,8 @@ typedef enum {
 
 	EV_CAMERA_APPEAR,
 
+	EV_CLIENT_MESSAGE,
+
 	EV_NUM_EVENTS
 } event_t;
 

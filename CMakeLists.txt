@@ -604,6 +604,7 @@ if(UFOAI_BUILD_UFO)
       ${UFOAI_SRC}/client/battlescape/events/event/player/e_event_centerview.cpp
       ${UFOAI_SRC}/client/battlescape/events/event/player/e_event_doendround.cpp
       ${UFOAI_SRC}/client/battlescape/events/event/player/e_event_endroundannounce.cpp
+      ${UFOAI_SRC}/client/battlescape/events/event/player/e_event_message.cpp
       ${UFOAI_SRC}/client/battlescape/events/event/player/e_event_reset.cpp
       ${UFOAI_SRC}/client/battlescape/events/event/player/e_event_results.cpp
       ${UFOAI_SRC}/client/battlescape/events/event/player/e_event_startgame.cpp
@@ -1690,6 +1691,7 @@ if(UFOAI_BUILD_UFOTESTALL)
       ${UFOAI_SRC}/client/battlescape/events/event/player/e_event_centerview.cpp
       ${UFOAI_SRC}/client/battlescape/events/event/player/e_event_doendround.cpp
       ${UFOAI_SRC}/client/battlescape/events/event/player/e_event_endroundannounce.cpp
+      ${UFOAI_SRC}/client/battlescape/events/event/player/e_event_message.cpp
       ${UFOAI_SRC}/client/battlescape/events/event/player/e_event_reset.cpp
       ${UFOAI_SRC}/client/battlescape/events/event/player/e_event_results.cpp
       ${UFOAI_SRC}/client/battlescape/events/event/player/e_event_startgame.cpp
